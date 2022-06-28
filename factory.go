@@ -23,7 +23,7 @@ func InitLogic() {
 }
 
 func InitControllers() {
-	controller := controller.NewHTTPRouter()
-	controller.InitPerson(personLogic)
-	controller.Run()
+	router := controller.NewHTTPRouter()
+	router.InitPerson(personLogic)
+	router.RunHTTPS()
 }

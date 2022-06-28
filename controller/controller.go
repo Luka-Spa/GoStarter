@@ -21,10 +21,18 @@ func NewHTTPRouter() *httpRouter {
 	}
 }
 
-func (r *httpRouter) Run() {
+func (r *httpRouter) RunHTTP() {
 	port, hasValue := os.LookupEnv("HTTP_PORT")
 	if !hasValue {
 		port = "8080"
 	}
 	r.router.Run(fmt.Sprintf("%s:%s", os.Getenv("HOST"), port))
+}
+
+func (r *httpRouter) RunHTTPS() {
+	port, hasvalue := os.LookupEnv("HTTP_PORT")
+	if !hasvalue {
+		port = "8080"
+	}
+	r.router.RunTLS(fmt.Sprintf("%s:%s", os.Getenv("HOST"), port), "./cert.pem", "./key.pem")
 }
