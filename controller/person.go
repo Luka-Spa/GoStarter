@@ -2,15 +2,37 @@ package controller
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/Luka-Spa/GoAPI/logic"
 	"github.com/Luka-Spa/GoAPI/model"
+	"github.com/Luka-Spa/GoAPI/repository"
 	"github.com/gin-gonic/gin"
 )
 
 func (r *httpRouter) InitPerson(logic *logic.PersonLogic) {
 	r.api.GET("/person", func(c *gin.Context) {
-		var people = logic.All()
+		var qp = repository.QueryParams{}
+		l := c.Query("limit")
+
+		if len(l) > 0 {
+			limit, err := strconv.Atoi(l)
+			if err != nil {
+				c.AbortWithStatusJSON(400, "invalid query parameter value: limit")
+				return
+			}
+			qp.Limit = limit
+		}
+		p := c.Query("page")
+		if len(p) > 0 {
+			page, err := strconv.Atoi(p)
+			if err != nil {
+				c.AbortWithStatusJSON(400, "invalid query parameter value: page")
+				return
+			}
+			qp.Page = page
+		}
+		var people = logic.All(qp)
 		if people == nil {
 			people = make([]model.Person, 0)
 		}

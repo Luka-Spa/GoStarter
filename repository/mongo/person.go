@@ -27,9 +27,15 @@ func NewPersonRepository(db *mongo.Database) repository.IPerson {
 	return &personRepository{person: db.Collection("person")}
 }
 
-func (r *personRepository) All() ([]model.Person, error) {
+func (r *personRepository) All(qp repository.QueryParams) ([]model.Person, error) {
 	var people []model.Person
-	result, err := r.person.Find(context.TODO(), bson.D{})
+	var ops = options.Find()
+	skip := qp.Page * qp.Limit
+	ops.SetSkip(int64(skip))
+	if qp.Limit > -1 {
+		ops.SetLimit(int64(qp.Limit))
+	}
+	result, err := r.person.Find(context.TODO(), bson.D{}, ops)
 	if err != nil {
 		log.Errorln(err)
 	}

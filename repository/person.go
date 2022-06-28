@@ -5,7 +5,7 @@ import (
 )
 
 type IPerson interface {
-	All() ([]model.Person, error)
+	All(qp QueryParams) ([]model.Person, error)
 	Create(person model.Person) (model.Person, error)
 	Update(id string, person model.Person) (model.Person, error)
 	Delete(id string) error

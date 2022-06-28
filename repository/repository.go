@@ -5,3 +5,8 @@ type IRepository interface {
 	Connect() error
 	Disconnect() error
 }
+
+type QueryParams struct {
+	Limit int
+	Page  int
+}

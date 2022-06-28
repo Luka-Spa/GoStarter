@@ -15,8 +15,8 @@ func NewPersonLogic(repository repository.IPerson) *PersonLogic {
 	}
 }
 
-func (l *PersonLogic) All() []model.Person {
-	people, _ := l.repo.All()
+func (l *PersonLogic) All(qp repository.QueryParams) []model.Person {
+	people, _ := l.repo.All(qp)
 	return people
 }
 
