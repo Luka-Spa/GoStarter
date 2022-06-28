@@ -2,7 +2,6 @@ package mongo
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"time"
 
@@ -13,37 +12,44 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
-type MongoRepository struct{}
+type mongoRepository struct{}
 
-var db *mongo.Client
+var client *mongo.Client
+var db *mongo.Database
+
 var ctx, _ = context.WithTimeout(context.Background(), 10*time.Second)
 
 func NewRepository() repository.IRepository {
-	return &MongoRepository{}
+	return &mongoRepository{}
 }
 
-func (m *MongoRepository) Connect() error {
+func (m *mongoRepository) Connect() error {
 	uri := os.Getenv("MONGO_URL")
 	log.Info("Connecting to mongo..")
-	db, _ = mongo.Connect(ctx, options.Client().ApplyURI(uri))
-	defer m.Disconnect()
 	var err error
-	if err = db.Ping(ctx, readpref.Primary()); err != nil {
+	client, err = mongo.Connect(ctx, options.Client().ApplyURI(uri))
+	if err != nil {
 		log.Errorln(err)
 		return err
 	}
-	fmt.Println("Successfully connected to Mongo")
+	if err = client.Ping(ctx, readpref.Primary()); err != nil {
+		log.Errorln(err)
+		return err
+	}
+	log.Infoln("Successfully connected to Mongo")
+	db = client.Database(os.Getenv("MONGO_DATABASE"))
 	return nil
 }
 
-func (*MongoRepository) GetContext() interface{} {
+func (*mongoRepository) GetContext() interface{} {
 	return db
 }
 
-func (*MongoRepository) Disconnect() error {
+func (*mongoRepository) Disconnect() error {
 	var err error
-	if err = db.Disconnect(ctx); err != nil {
-		log.Error(err)
+	log.Infoln("Closing mongo connection...")
+	if err = client.Disconnect(ctx); err != nil {
+		log.Infoln(err)
 	}
 	return err
 }

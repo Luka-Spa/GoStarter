@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Luka-Spa/GoAPI/repository/mongo"
 	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
 )
@@ -22,8 +21,11 @@ func main() {
 		log.Info("Environment file was not loaded, using System Variables")
 	}
 	fmt.Printf("Server starting in a %s environment \n", *environment)
-	var m = mongo.NewRepository()
-	m.Connect()
-	defer m.Disconnect()
-	log.Info(os.Getenv("PORT"))
+	// var m = mongo.NewRepository()
+	// m.Connect()
+	// defer m.Disconnect()
+	UseMongo()
+	InitLogic()
+	InitControllers()
+	defer rep.Disconnect()
 }

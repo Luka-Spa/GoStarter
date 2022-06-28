@@ -7,6 +7,6 @@ import (
 type IPerson interface {
 	All() ([]model.Person, error)
 	Create(person model.Person) (model.Person, error)
-	Update(person model.Person) (model.Person, error)
+	Update(id string, person model.Person) (model.Person, error)
 	Delete(id string) error
 }
