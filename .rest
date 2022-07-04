@@ -1,8 +1,8 @@
 # Install REST Client for vscode to use
-# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+# marketplace.visualstudio.com/items?itemName=humao.rest-client
 
 # Variables
-@host = localhost:8080
+@host = http://localhost:8080
 @prefix = api
 @resource = person
 @id = 000000000000000000000000
@@ -10,13 +10,13 @@
 # Requests
 
 ### GET
-GET https://{{host}}/{{prefix}}/{{resource}}?limit=-1&page=1
+GET {{host}}/{{prefix}}/{{resource}}?limit=-1&page=1
 
 ### GET BY ID
-GET https://{{host}}/{{prefix}}/{{resource}}/{{id}}
+GET {{host}}/{{prefix}}/{{resource}}/{{id}}
 
 ### POST
-POST https://{{host}}/{{prefix}}/{{resource}}
+POST {{host}}/{{prefix}}/{{resource}}
 content-type: application/json
 
 {
@@ -24,7 +24,7 @@ content-type: application/json
     "last_name": "Doe"
 }
 ### PUT
-PUT https://{{host}}/{{prefix}}/{{resource}}/{{id}}
+PUT {{host}}/{{prefix}}/{{resource}}/{{id}}
 content-type: application/json
 
 {
@@ -32,4 +32,4 @@ content-type: application/json
     "last_name": "Doe"
 }
 ### DELETE
-DELETE https://{{host}}/{{prefix}}/{{resource}}/{{id}}
+DELETE {{host}}/{{prefix}}/{{resource}}/{{id}}

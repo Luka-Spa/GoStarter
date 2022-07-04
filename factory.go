@@ -27,5 +27,5 @@ func InitLogic() {
 func InitControllers() {
 	router := controller.NewHTTPRouter()
 	router.InitPerson(personLogic)
-	router.RunHTTPS()
+	router.RunHTTP()
 }
