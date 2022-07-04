@@ -16,7 +16,8 @@ var rep repository.IRepository
 func UseMongo() {
 	rep = mongo.NewRepository()
 	rep.Connect()
-	personRepository = mongo.NewRepo[model.Person](rep.GetContext().(*mg.Database), "person")
+	var db = rep.GetContext().(*mg.Database)
+	personRepository = mongo.NewRepo[model.Person](db, "person")
 }
 
 func InitLogic() {
