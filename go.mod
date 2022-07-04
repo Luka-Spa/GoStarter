@@ -37,5 +37,6 @@ require (
 	github.com/gin-gonic/gin v1.8.1
 	github.com/joho/godotenv v1.4.0
 	go.mongodb.org/mongo-driver v1.9.1
-	golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 // indirect
+	golang.org/x/exp v0.0.0-20220613132600-b0d781184e0d
+	golang.org/x/sys v0.0.0-20211019181941-9d821ace8654 // indirect
 )

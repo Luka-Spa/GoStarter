@@ -2,22 +2,26 @@
 # https://marketplace.visualstudio.com/items?itemName=humao.rest-client
 
 ### GET
-GET https://localhost:8080/api/person?limit=2&page=1
+GET https://localhost:8080/api/person?limit=1&page=1
+
+### GET BY ID
+GET https://localhost:8080/api/person/62bb0b57034b86026f412e1b
+
 ### POST
 POST https://localhost:8080/api/person
+content-type: application/json
+
+{
+    "first_name": "John",
+    "last_name": "Doe"
+}
+### PUT
+PUT https://localhost:8080/api/person/62bafdda35b3ea029b1b706f
 content-type: application/json
 
 {
     "first_name": "Jane",
     "last_name": "Doe"
 }
-### PUT
-PUT https://localhost:8080/api/person/62babda93eb1089c845a6417
-content-type: application/json
-
-{
-    "first_name": "Johnny",
-    "last_name": "Cage"
-}
 ### DELETE
-DELETE https://localhost:8080/api/person/62bab749dc84e63e4ff817eb
+DELETE https://localhost:8080/api/person/62c2f9354ddf7a6dea8bca36

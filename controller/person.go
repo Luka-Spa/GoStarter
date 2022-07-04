@@ -11,6 +11,7 @@ import (
 )
 
 func (r *httpRouter) InitPerson(logic *logic.PersonLogic) {
+	// UseAuthorisation([]string{"read:users"})
 	r.api.GET("/person", func(c *gin.Context) {
 		var qp = repository.QueryParams{}
 		l := c.Query("limit")
@@ -37,6 +38,15 @@ func (r *httpRouter) InitPerson(logic *logic.PersonLogic) {
 			people = make([]model.Person, 0)
 		}
 		c.JSON(http.StatusOK, people)
+	})
+	r.api.GET("/person/:id", func(c *gin.Context) {
+		var id = c.Param("id")
+		var person, err = logic.ById(id)
+		if err != nil {
+			c.AbortWithStatusJSON(400, err.Error())
+			return
+		}
+		c.JSON(http.StatusOK, person)
 	})
 	r.api.POST("/person", func(c *gin.Context) {
 		var input model.Person
