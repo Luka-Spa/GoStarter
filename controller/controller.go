@@ -32,7 +32,7 @@ func (r *httpRouter) RunHTTP() {
 func (r *httpRouter) RunHTTPS() {
 	port, hasvalue := os.LookupEnv("HTTP_PORT")
 	if !hasvalue {
-		port = "8080"
+		port = "443"
 	}
 	r.router.RunTLS(fmt.Sprintf("%s:%s", os.Getenv("HOST"), port), "./cert.pem", "./key.pem")
 }

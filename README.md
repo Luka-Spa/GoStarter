@@ -43,5 +43,5 @@
 [license-url]: https://github.com/Luka-Spa/GoStarter/blob/main/LICENSE
 [contributors-shield]: https://img.shields.io/github/contributors/Luka-Spa/GoStarter?color=blue&style=for-the-badge
 [contributors-url]: https://github.com/Luka-Spa/GoStarter/graphs/contributors
-[go-version-shield]: https://img.shields.io/badge/Go%20Version-1.18.3-success?style=for-the-badge
+[go-version-shield]: https://img.shields.io/badge/Go%20Version-1.20.2-success?style=for-the-badge
 [go-version-url]: https://go.dev/dl/
